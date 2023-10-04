@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/beatrice.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/beatrice.md)]
+[[portfolio](team/beatricecst.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
