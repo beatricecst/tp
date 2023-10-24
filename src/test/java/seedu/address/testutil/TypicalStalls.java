@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_ASIAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BRITISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ASIAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BRITISH;
+import static seedu.address.testutil.TypicalMenus.VALID_MENU_1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,9 @@ import seedu.address.model.stall.Stall;
  * A utility class containing a list of {@code Stall} objects to be used in tests.
  */
 public class TypicalStalls {
+
+    public static final Stall CHICKEN_RICE = new StallBuilder().withName("Chicken Rice")
+            .withLocation("Deck").withMenu(VALID_MENU_1).build();
 
     public static final Stall AUNTIES_COOKING = new StallBuilder().withName("Auntie's Cooking")
             .withLocation("Deck").build();

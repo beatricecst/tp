@@ -106,7 +106,7 @@ public interface Model {
     /**
      * Returns true if an item review exists in the item.
      */
-    boolean hasItemReview(Stall stallIndex, Item item);
+    boolean hasItemReview(Item item);
 
     /**
      * Adds the given item.
@@ -125,12 +125,12 @@ public interface Model {
      *
      * {@code itemReview} must not already exist in the item.
      */
-    void addItemReview(Stall stallIndex, Item itemIndex, ItemReview itemReview);
+    void addItemReview(Item itemIndex, ItemReview itemReview);
 
     /**
      * Deletes the given item review.
      *
      * {@code itemReview} must exist in the item.
      */
-    void deleteItemReview(Stall stallIndex, Item itemIndex);
+    void deleteItemReview(Item itemIndex);
 }

@@ -54,6 +54,43 @@ Noodle stall at Frontier  ★★★★☆
 ```
 please enter list only
 ```
+
+**Find stalls by name:** find-stall
+
+**Command format:** find-stall <KEYWORD>
+
+**Ex.:** find-stall japan
+
+**Expected output (Success):**
+```
+Japanese Stall at Deck  ★★★★☆
+Japanese Stall at Engine  ★★★★☆
+Japan Delights at Frontier  ★★★★☆
+```
+**Expected output (Fail):**
+```
+re-enter in the format : find-stall <KEYWORD>
+```
+
+**Find stalls by item:** find-item
+
+**Command format:** find-item <KEYWORD>
+
+**Ex.:** find-item chicken
+
+**Expected output (Success):**
+```
+Chicken Rice at Deck  ★★★★☆
+Western Food at Deck  ★★★★☆
+```
+Chicken Rice at Deck has an item called Chicken Rice, and Western Food at Deck has an item called Chicken Chop, 
+thus both will be shown when you search for chicken.
+
+
+**Expected output (Fail):**
+```
+re-enter in the format : find-item <KEYWORD>
+```
 --------------------------------------------------------------------------------------------------------------------
 ## Stall Features
 

@@ -6,7 +6,7 @@ import seedu.address.model.stall.Stall;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withStall("Japanese Stall", "Korean Stall").build();}
  */
 public class AddressBookBuilder {
 

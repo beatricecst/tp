@@ -14,7 +14,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.item.review.ItemReview;
 import seedu.address.model.stall.Stall;
 
@@ -65,20 +64,20 @@ public class AddItemReviewCommand extends Command {
         }
 
         Stall stallToUpdate = lastShownList.get(stallIndex.getZeroBased());
-        UniqueItemList menu = stallToUpdate.getMenu();
+        List<Item> itemList = stallToUpdate.getMenu().getItemList();
 
 
-        if (itemIndex.getZeroBased() >= menu.getSize()) {
+        if (itemIndex.getZeroBased() >= itemList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
 
-        Item itemToUpdate = menu.getItem(itemIndex.getZeroBased());
+        Item itemToUpdate = itemList.get(itemIndex.getZeroBased());
 
-        if (model.hasItemReview(stallToUpdate, itemToUpdate)) {
+        if (model.hasItemReview(itemToUpdate)) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM_REVIEW);
         }
 
-        model.addItemReview(stallToUpdate, itemToUpdate, toAdd);
+        model.addItemReview(itemToUpdate, toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, itemToUpdate.getName(), stallToUpdate.getName()));
     }
 

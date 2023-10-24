@@ -187,17 +187,17 @@ public class AddStallCommandTest {
         }
 
         @Override
-        public void addItemReview(Stall stall, Item item, ItemReview itemReview) {
+        public void addItemReview(Item item, ItemReview itemReview) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteItemReview(Stall stall, Item item) {
+        public void deleteItemReview(Item item) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasItemReview(Stall stall, Item item) {
+        public boolean hasItemReview(Item item) {
             throw new AssertionError("This method should not be called.");
         }
 

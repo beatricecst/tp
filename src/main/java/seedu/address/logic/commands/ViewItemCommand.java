@@ -12,7 +12,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.stall.Stall;
 
 /**
@@ -53,13 +52,13 @@ public class ViewItemCommand extends Command {
         }
 
         Stall stallToViewFrom = lastShownList.get(stallIndex.getZeroBased());
-        UniqueItemList menu = stallToViewFrom.getMenu();
+        List<Item> menu = stallToViewFrom.getMenu().getItemList();
 
-        if (itemIndex.getZeroBased() >= menu.getSize()) {
+        if (itemIndex.getZeroBased() >= menu.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
 
-        Item itemToView = menu.getItem(itemIndex.getZeroBased());
+        Item itemToView = menu.get(itemIndex.getZeroBased());
         model.setFilteredItem(itemToView);
         return new CommandResult(String.format(MESSAGE_VIEW_ITEM_SUCCESS, Messages.format(itemToView), Messages
                 .format(stallToViewFrom)), false, false, false, true);
