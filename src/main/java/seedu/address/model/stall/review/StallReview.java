@@ -25,10 +25,18 @@ public class StallReview {
      * @param rating   A rating representing the star rating.
      */
     public StallReview(Description description, Rating rating) {
-        requireAllNonNull(rating, description);
         this.rating = rating;
         this.description = description;
     }
+
+  /**
+   * Constructs a StallReview object that does not contain ratings and descriptions.
+   *
+   */
+  public StallReview() {
+    this.rating = null;
+    this.description = null;
+  }
 
     public Rating getRating() {
         return rating;
@@ -39,15 +47,15 @@ public class StallReview {
     }
 
     public String stallReviewString() {
-      if (rating == null && description == null) {
+      if (this.rating == null && this.description == null) {
         String str = "This stall has no reviews yet";
         return str;
       }
-      if (rating == null) {
+      if (this.rating == null) {
         String str = this.getDescription().toString();
         return str;
       }
-      if (description == null) {
+      if (this.description == null) {
         String str = this.getRating().toString();
         return str;
       }

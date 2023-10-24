@@ -33,6 +33,7 @@ public class Stall {
         this.name = name;
         this.location = location;
         this.menu = new UniqueItemList();
+        this.stallReview = new StallReview();
     }
 
     public Name getName() {
