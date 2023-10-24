@@ -38,6 +38,23 @@ public class StallReview {
         return description;
     }
 
+    public String stallReviewString() {
+      if (rating == null && description == null) {
+        String str = "This stall has no reviews yet";
+        return str;
+      }
+      if (rating == null) {
+        String str = this.getDescription().toString();
+        return str;
+      }
+      if (description == null) {
+        String str = this.getRating().toString();
+        return str;
+      }
+      String str = this.getRating().toString() + this.getDescription().toString();
+      return str;
+    }
+
     /**
      * Returns the string representation of the StallReview.
      *

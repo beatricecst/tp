@@ -154,6 +154,9 @@ Classes used by multiple components are in the `seedu.FoodNotes.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add a stall review feature
+![Add a stall review](images/ReviewStallDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -376,7 +379,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 4a. There are no reviews.
-    
+
   Use case ends.
 
 **Use case: Add a menu item to a stall**

@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FoodNotesParser" as FoodNotesParser LOGIC_COLOR
+participant ":AddStallReviewCommandParser"  as AddStallReviewCommandParser LOGIC_COLOR
+participant "r:AddStallReviewCommand" as AddStallReviewCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+[-> LogicManager : execute(review-stall s/1 r/1 d/auntie)
+activate LogicManager
+
+
+LogicManager -> FoodNotesParser : parseCommand(review-stall s/1 r/1 d/auntie)
+activate FoodNotesParser
+
+create AddStallReviewCommandParser
+FoodNotesParser -> AddStallReviewCommandParser
+activate AddStallReviewCommandParser
+
+AddStallReviewCommandParser --> FoodNotesParser
+deactivate AddStallReviewCommandParser
+
+FoodNotesParser -> AddStallReviewCommandParser : parse("s/1 r/1 d/auntie")
+activate AddStallReviewCommandParser
+
+create AddStallReviewCommand
+AddStallReviewCommandParser -> AddStallReviewCommand
+activate AddStallReviewCommand
+
+AddStallReviewCommand --> AddStallReviewCommandParser : r
+deactivate AddStallReviewCommand
+
+AddStallReviewCommandParser --> FoodNotesParser: r
+deactivate AddStallReviewCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddStallReviewCommandParser -[hidden]-> FoodNotesParser: r
+destroy AddStallReviewCommandParser
+
+
+FoodNotesParser --> LogicManager : r
+deactivate FoodNotesParser
+
+LogicManager -> AddStallReviewCommand : execute()
+activate AddStallReviewCommand
+
+
+AddStallReviewCommand -> Model : setStallReview(r)
+activate Model
+
+Model --> AddStallReviewCommand
+deactivate Model
+
+create CommandResult
+AddStallReviewCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddStallReviewCommand
+deactivate CommandResult
+
+AddStallReviewCommand --> LogicManager : result
+deactivate AddStallReviewCommand
+
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
