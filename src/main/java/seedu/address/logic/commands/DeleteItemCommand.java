@@ -64,9 +64,9 @@ public class DeleteItemCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
 
-        Item itemToDelete = itemList.get(itemIndex.getZeroBased());
+        Item itemToDelete = model.getFilteredItem(stallIndex, itemIndex);
 
-        model.deleteItem(stallToDeleteFrom, itemToDelete);
+        model.deleteItem(stallIndex, itemIndex);
         return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, Messages.format(itemToDelete), Messages
                 .format(stallToDeleteFrom)));
     }

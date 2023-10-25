@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -127,6 +128,11 @@ public class AddStallCommandTest {
         }
 
         @Override
+        public Stall getFilteredStall(Index stallIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -172,12 +178,12 @@ public class AddStallCommandTest {
         }
 
         @Override
-        public void addItem(Stall stall, Item item) {
+        public void addItem(Index stallIndex, Item item) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteItem(Stall stall, Item item) {
+        public void deleteItem(Index stall, Index item) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -208,6 +214,11 @@ public class AddStallCommandTest {
 
         @Override
         public Item getFilteredItem() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Item getFilteredItem(Index stallIndex, Index itemIndex) {
             throw new AssertionError("This method should not be called.");
         }
     }

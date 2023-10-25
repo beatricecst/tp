@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.item.Item;
 import seedu.address.model.stall.review.StallReview;
@@ -94,8 +95,10 @@ public class Stall {
      * Deletes an item from the menu.
      * The item must already exist in the menu.
      */
-    public void deleteItem(Item item) {
-        menu.removeItem(item);
+
+    public void deleteItem(Index itemIndex) {
+        menu.removeItem(itemIndex);
+
     }
 
     public void deleteReview() {

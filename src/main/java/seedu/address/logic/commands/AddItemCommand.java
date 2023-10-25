@@ -52,13 +52,13 @@ public class AddItemCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STALL_DISPLAYED_INDEX);
         }
 
-        Stall stallToUpdate = lastShownList.get(stallIndex.getZeroBased());
+        Stall stallToUpdate = model.getFilteredStall(stallIndex);
 
         if (model.hasItem(stallToUpdate, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
-        model.addItem(stallToUpdate, toAdd);
+        model.addItem(stallIndex, toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

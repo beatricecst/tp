@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 
@@ -95,7 +96,8 @@ public class UniqueItemList implements Iterable<Item> {
      * Removes the equivalent item from the list.
      * The item must exist in the list.
      */
-    public void remove(Item toRemove) {
+    public void remove(Index itemIndex) {
+        Item toRemove = internalList.get(itemIndex.getZeroBased());
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new ItemNotFoundException();

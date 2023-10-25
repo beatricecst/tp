@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.review.ItemReview;
 import seedu.address.model.stall.Stall;
@@ -145,11 +146,16 @@ public class ModelManager implements Model {
         filteredStalls.setPredicate(predicate);
     }
 
+    @Override
+    public Stall getFilteredStall(Index stallIndex) {
+        return filteredStalls.get(stallIndex.getZeroBased());
+    }
+
     //=========== Filtered Item List Accessors =============================================================
+
     @Override
     public boolean hasItem(Stall stall, Item item) {
-        requireNonNull(stall);
-        requireNonNull(item);
+        requireAllNonNull(stall, item);
         return stall.hasItem(item);
     }
 
@@ -160,17 +166,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addItem(Stall stall, Item item) {
-        requireNonNull(stall);
+    public void addItem(Index stallIndex, Item item) {
+        requireNonNull(stallIndex);
         requireNonNull(item);
-        stall.addItem(item);
+        this.getFilteredStall(stallIndex).addItem(item);
     }
 
     @Override
-    public void deleteItem(Stall stall, Item item) {
-        requireNonNull(stall);
-        requireNonNull(item);
-        stall.deleteItem(item);
+    public void deleteItem(Index stallIndex, Index itemIndex) {
+        requireNonNull(stallIndex);
+        requireNonNull(itemIndex);
+        this.getFilteredStall(stallIndex).deleteItem(itemIndex);
     }
 
     @Override
@@ -190,6 +196,11 @@ public class ModelManager implements Model {
     @Override
     public Item getFilteredItem() {
         return filteredItem;
+    }
+    @Override
+    public Item getFilteredItem(Index stallIndex, Index itemIndex) {
+        requireAllNonNull(stallIndex, itemIndex);
+        return getFilteredStall(stallIndex).getMenu().getItem(itemIndex);
     }
 
     @Override

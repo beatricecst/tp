@@ -58,7 +58,8 @@ public class ViewItemCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
 
-        Item itemToView = menu.get(itemIndex.getZeroBased());
+        Item itemToView = model.getFilteredItem(stallIndex, itemIndex);
+
         model.setFilteredItem(itemToView);
         return new CommandResult(String.format(MESSAGE_VIEW_ITEM_SUCCESS, Messages.format(itemToView), Messages
                 .format(stallToViewFrom)), false, false, false, true);

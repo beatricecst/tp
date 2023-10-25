@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.review.ItemReview;
 import seedu.address.model.stall.Stall;
@@ -74,6 +75,11 @@ public interface Model {
     void addStall(Stall stall);
 
     /**
+     * Returns the filtered stall.
+     */
+    Stall getFilteredStall(Index stallIndex);
+
+    /**
      * Replaces the given stall {@code target} with {@code editedStall}.
      * {@code target} must exist in the address book.
      * The stall identity of {@code editedStall} must not be the same as another existing stall in the address book.
@@ -84,6 +90,11 @@ public interface Model {
     ObservableList<Stall> getFilteredStallList();
 
     ObservableList<Stall> getTempFilteredStallList();
+    /**
+     * Returns the filtered item.
+     */
+    Item getFilteredItem(Index stallIndex, Index itemIndex);
+
     /** Returns the desired filtered item */
     Item getFilteredItem();
 
@@ -112,13 +123,19 @@ public interface Model {
      * Adds the given item.
      * {@code item} must not already exist in the menu.
      */
-    void addItem(Stall stallIndex, Item item);
+    void addItem(Index stallIndex, Item item);
 
     /**
      * Deletes the given item.
      * The item must exist in the stall menu.
      */
-    void deleteItem(Stall stallIndex, Item item);
+    void deleteItem(Index stallIndex, Index itemIndex);
+
+    /**
+     * Deletes the given item review.
+     * The item review must exist in the item.
+     */
+    void deleteItemReview(Item itemIndex);
 
     /**
      * Adds the given item review.
@@ -127,10 +144,5 @@ public interface Model {
      */
     void addItemReview(Item itemIndex, ItemReview itemReview);
 
-    /**
-     * Deletes the given item review.
-     *
-     * {@code itemReview} must exist in the item.
-     */
-    void deleteItemReview(Item itemIndex);
+
 }

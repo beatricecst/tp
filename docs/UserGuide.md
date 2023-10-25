@@ -3,10 +3,55 @@ layout: page
 title: User Guide
 ---
 
-FoodNotes is a **desktop app for managing food reviews, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, foodnotes can get your food review tasks done faster than traditional GUI apps.
+FoodNotes is a desktop app made for foodies like you to **manage food reviews**, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, foodnotes can get your food review tasks done faster than traditional GUI apps.
 
 * Table of Contents
   {:toc}
+
+<div markdown="block" class="index">
+
+<div style="page-break-after: always;"></div>
+
+## About the user guide
+
+### Navigating the user guide
+
+* If you are a **new user**, the [Quick start](#quick-start) section provides instructions for you on how to get started.
+
+* Once you have set up FoodNotes, you can check out the [Screen layout](#screen-layout) section to get familiar with the different components of FoodNotes. To learn the basics of using FoodNotes, head over to the [Features](#features) section.
+
+* If you are an **experienced user**, you can refer to the [Command summary](#command-summary) section for an overview of FoodNotes' commands.
+
+* If you have any queries about using FoodNotes, you can check out the [FAQ](#faq) section.
+
+### Reading the user guide
+
+#### Icons
+
+This section will run you through the icons used in this guide.
+
+| Icon           | Meaning                                                          |
+|----------------|------------------------------------------------------------------|
+| :bulb:         | Extra information that you may find useful.                      |
+| :exclamation:  | Information you should be aware of to avoid running into errors. |
+| :fast_forward: | Information about future updates to a feature.                   |
+
+<div style="page-break-after: always;"></div>
+
+#### Input parameters
+
+This section provides a summary of the parameters used when inputting commands into the application.
+
+| Prefix | Parameter        | Meaning                                            | Input                                                                        |
+|--------|------------------|----------------------------------------------------|------------------------------------------------------------------------------|
+| `n/`   | `STALL_NAME`     | Name of the stall                                  | Alphanumeric value with 1 to 27 characters (inclusive)                       |
+| `s/`   | `STALL_INDEX`    | Index of the stall in the list                     | Integer from 0 to 2147483647 (inclusive)                                     |
+| `l/`   | `STALL_LOCATION` | Location of the stall                              | Alphanumeric value with 1 to 27 characters (inclusive)                       |
+| `i/`   | `ITEM_NAME`      | Name of the item                                   | Alphanumeric value with 1 to 27 characters (inclusive)                       |
+| `r/`   | `STALL_RATING`   | Rating of the stall                                | Integer from 0 to 5 (inclusive)                                              |
+| `r/`   | `ITEM_RATING`    | Rating of the item                                 | Integer from 0 to 5 (inclusive)                                              |
+| `d/`   | `DESCRIPTION`    | Descriptive review for the stalls or items         | Alphanumeric value with 1 to 27 characters (inclusive)                       |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,6 +80,26 @@ FoodNotes is a **desktop app for managing food reviews, optimized for use via a 
 
 
 1. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: **Note:**<br>
+
+* For new users, the application will contain all the data of NUS food stalls and their menu items
+* If double-clicking `foodNotes.jar` does not work,
+  1. Search for "Command Prompt" or "Terminal" on your computer.
+  2. Navigate to the location where `foodNotes.jar` is saved via the terminal. (_Unsure how to navigate?_ You can try running this in your terminal: `cd Downloads`.)
+  3. Run the following in the terminal: `java -jar foodNotes.jar`.
+
+</div>
+
+<div markdown="block" class="alert alert-warning">
+
+:exclamation: **Warning:**<br>
+
+Upon launching the application, some files responsible for the storage of your data will be created in a folder called `data` located in the same folder as `foodNotes.jar`. If you are a new user, you are advised not to edit these files. If the changes you made to the data file invalidates its format, FoodNotes will discard all your data and start with an empty data file.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -136,7 +201,7 @@ re-enter in the format : view-stall s/<STALL_NUMBER>
 ```
 Japanese Stall ★★★★☆ has been deleted.
 ```
-  
+
 **Expected output (Fail):**
 
 ```
@@ -232,7 +297,7 @@ re-enter in the format : delete-item s/STALL_NUMBER i/ITEM_NUMBER
 **Expected output (Success):**
 ```
 Yay! You have added a review for the White Chicken Rice at the Chicken Rice Stall at Deck.
-Review: 
+Review:
 ★★★★★
 Tasty chicken rice with a good amount of meat and rice. The chilli is also very good.
 ```

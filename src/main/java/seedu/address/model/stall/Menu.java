@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
@@ -66,6 +67,10 @@ public class Menu implements ReadOnlyMenu {
         return items.contains(item);
     }
 
+    public Item getItem(Index itemIndex) {
+        return items.getItem(itemIndex.getZeroBased());
+    }
+
     /**
      * Adds an item to the menu.
      * The item must not already exist in the menu.
@@ -89,8 +94,8 @@ public class Menu implements ReadOnlyMenu {
      * Removes {@code key} from this {@code Menu}.
      * {@code key} must exist in the menu.
      */
-    public void removeItem(Item key) {
-        items.remove(key);
+    public void removeItem(Index itemIndex) {
+        items.remove(itemIndex);
     }
 
     //// util methods
