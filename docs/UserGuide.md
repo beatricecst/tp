@@ -9,7 +9,7 @@ title: User Guide
     - [1.1. Purpose](#11-purpose)
 2. [About the User Guide](#2-about-the-user-guide)
     - [2.1. Navigating the User Guide](#21-navigating-the-user-guide)
-    - [2.2. Reading the User Guide](#22-reading-the-user-guide)   
+    - [2.2. Reading the User Guide](#22-reading-the-user-guide)
       * [2.2.1. Icons](#icons)
       * [2.2.2. Parameters](#parameters)
 3. [Quick Start](#3-quick-start)
@@ -29,9 +29,9 @@ title: User Guide
 Welcome to the User Guide of **FoodNotes**!
 
 Ever find yourself forgetting the delightful dishes you savored? Hungry for a way to recall your favorite food experiences? FoodNotes has the solution.
- 
 
-   
+
+
 ## **1.1 Purpose** <a id="11-purpose"></a>
 
 FoodNotes is a desktop app made for foodies like you to **manage food reviews**, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, foodnotes can get your food review tasks done faster than traditional GUI apps.
@@ -71,15 +71,16 @@ This section will run you through the icons used in this guide.
 
 This section provides a summary of the parameters used when inputting commands into the application.
 
-| Prefix | Parameter        | Meaning                                            | Input                                                                        |
-|--------|------------------|----------------------------------------------------|------------------------------------------------------------------------------|
-| `n/`   | `STALL_NAME`     | Name of the stall                                  | Alphanumeric value with 1 to 27 characters (inclusive)                       |
-| `s/`   | `STALL_INDEX`    | Index of the stall in the list                     | Integer from 0 to 2147483647 (inclusive)                                     |
-| `l/`   | `STALL_LOCATION` | Location of the stall                              | Alphanumeric value with 1 to 27 characters (inclusive)                       |
-| `i/`   | `ITEM_NAME`      | Name of the item                                   | Alphanumeric value with 1 to 27 characters (inclusive)                       |
-| `r/`   | `STALL_RATING`   | Rating of the stall                                | Integer from 0 to 5 (inclusive)                                              |
-| `r/`   | `ITEM_RATING`    | Rating of the item                                 | Integer from 0 to 5 (inclusive)                                              |
-| `d/`   | `DESCRIPTION`    | Descriptive review for the stalls or items         | Alphanumeric value with 1 to 27 characters (inclusive)                       |
+| Prefix | Parameter         | Meaning                                   | Input                                                   |
+|--------|-------------------|-------------------------------------------|---------------------------------------------------------|
+| `n/`   | `STALL_NAME`      | Name of the stall                         | Alphanumeric value with 1 to 27 characters (inclusive)  |
+| `s/`   | `STALL_INDEX`     | Index of the stall in the list            | Integer from 0 to 2147483647 (inclusive)                |
+| `l/`   | `STALL_LOCATION`  | Location of the stall                     | Alphanumeric value with 1 to 27 characters (inclusive)  |
+| `i/`   | `ITEM_NAME`       | Name of the item                          | Alphanumeric value with 1 to 27 characters (inclusive)  |
+| `r/`   | `STALL_RATING`    | Rating of the stall                       | Integer from 0 to 5 (inclusive)                         |
+| `r/`   | `ITEM_RATING`     | Rating of the item                        | Integer from 0 to 5 (inclusive)                         |
+| `d/`   | `DESCRIPTION`     | Descriptive review for the stalls or items| Alphanumeric value with 1 to 27 characters (inclusive)  |
+| `p/`   | `PRICE`           | Price of the item                         | Double to 2 decimal places                              |
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -145,9 +146,7 @@ Upon launching the application, some files responsible for the storage of your d
 
 **Expected output (Success):**
 ```
-Japanese Stall at Deck  ★★★★☆
-Cake shop at Engine  ★★★★☆
-Noodle stall at Frontier  ★★★★☆
+Here are the list of stalls!
 ```
 **Expected output (Fail):**
 ```
@@ -182,7 +181,7 @@ re-enter in the format : find-stall <KEYWORD>
 Chicken Rice at Deck  ★★★★☆
 Western Food at Deck  ★★★★☆
 ```
-Chicken Rice at Deck has an item called Chicken Rice, and Western Food at Deck has an item called Chicken Chop, 
+Chicken Rice at Deck has an item called Chicken Rice, and Western Food at Deck has an item called Chicken Chop,
 thus both will be shown when you search for chicken.
 
 
@@ -269,23 +268,25 @@ re-enter in the format : review-stall s/STALL_NUMBER r/STALL_RATING d/DESCRIPTIO
 
 **2.1 Adding an item to a stall:** add-item
 
-**Command format:** add-item s/STALL_NUMBER i/ITEM
+**Command format:** add-item s/STALL_NUMBER i/ITEM p/PRICE
 
-**Ex.:** add-item s/1 i/Chicken Rice
+**Ex.:** add-item s/1 i/Chicken Rice p/5.50
 
 **Expected output (Success):**
 ```
-Yay! Chicken Rice is successfully added as a menu item for Japanese Stall at Deck
+Yay! Chicken Rice ($5.50) is successfully added as a menu item for Japanese Stall at Deck
 ```
 **Expected output (Fail):**
 ```
-re-enter in the format : add-item s/STALL_NUMBER i/ITEM
+re-enter in the format : add-item s/STALL_NUMBER i/ITEM p/PRICE
 ```
 **Acceptable values:**
 
-- s/: Positive Integer less than or equal to the size of list,
+- s/: Positive Integer less than or equal to the size of list
 
 - i/: String
+
+- p/: Positive double to two decimal places
 
 **2.2 Viewing an item from a stall:** view-item
 
@@ -393,7 +394,7 @@ re-enter in the format: delete-item-review s/STALL_NUMBER i/ITEM_NUMBER
 | **Review stall**         | `review-stall s/<STALL_NUMBER> r/<STALL_RATING> d/<DESCRIPTION>` <br> e.g. review-stall s/1 r/5 d/the auntie very chio                                               |                                                                                                                                                             |
 
 ## 6.2 Item-Related Commands <a id="62-item-commands"></a>
-  
+
 | Features                                  | Format, Examples                                                                                                         |
 |-------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | **Add item**                              | `add-item s/<STALL_NUMBER> i/<ITEM>`<br> e.g. `add-item` add-item s/1 i/ChickenRice                                      |
