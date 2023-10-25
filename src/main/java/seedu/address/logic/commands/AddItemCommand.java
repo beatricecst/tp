@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Price;
 import seedu.address.model.stall.Stall;
 
 /**
@@ -27,20 +29,23 @@ public class AddItemCommand extends Command {
             + PREFIX_ITEM + "ITEM_NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STALL + "1 "
-            + PREFIX_ITEM + "Chicken Rice";
+            + PREFIX_ITEM + "Chicken Rice"
+            + PREFIX_PRICE + "5.50 ";
 
     public static final String MESSAGE_SUCCESS = "New Item added: %1$s";
     public static final String MESSAGE_DUPLICATE_ITEM = "This Item already exists in this Stall";
     private final Item toAdd;
     private final Index stallIndex;
+    private final Price price;
 
     /**
      * Creates an AddItemCommand to add the specified {@code Item}
      */
-    public AddItemCommand(Index stallIndex, Item item) {
+    public AddItemCommand(Index stallIndex, Item item, Price price) {
         requireNonNull(item);
         this.toAdd = item;
         this.stallIndex = stallIndex;
+        this.price = price;
     }
 
     @Override

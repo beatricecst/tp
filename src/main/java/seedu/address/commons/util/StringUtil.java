@@ -65,4 +65,27 @@ public class StringUtil {
             return false;
         }
     }
+
+  /**
+   * Returns true if {@code s} represents a non-zero unsigned double
+   * e.g. 1, 2, 3, ..., {@code Double.MAX_VALUE} <br>
+   * Will return false for any other non-null string input
+   * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+   * @throws NullPointerException if {@code s} is null.
+   */
+  public static boolean isNonZeroUnsignedDouble(String s) {
+    requireNonNull(s);
+
+    try {
+      // Check if the value has exactly two decimal places
+      String[] parts = s.split("\\.");
+      if (parts.length != 2 || parts[1].length() != 2) {
+        return false;
+      }
+      double value = Double.parseDouble(s);
+      return value > 0 && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+  }
 }

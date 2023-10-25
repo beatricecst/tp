@@ -6,6 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.ItemName;
+import seedu.address.model.item.Price;
 import seedu.address.model.review.Description;
 import seedu.address.model.review.Rating;
 import seedu.address.model.stall.Location;
@@ -22,6 +23,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_STALL_INDEX = "Stall index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_ITEM_INDEX = "Item index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ITEM_PRICE = "Item price is not a non-zero unsigned double with 2 decimal places.";
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -105,6 +108,23 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+
+  /**
+   * Parses a {@code String stallIndex} into an {@code Index}.
+   * Leading and trailing whitespaces will be trimmed.
+   *
+   * @param price The price of the item.
+   * @return The parsed price.
+   * @throws ParseException if the given {@code price} is invalid.
+   */
+  public static Price parsePrice(String price) throws ParseException {
+    String trimmedPrice = price.trim();
+    double value = Double.parseDouble(trimmedPrice);
+    if (!StringUtil.isNonZeroUnsignedDouble(trimmedPrice)) {
+      throw new ParseException(MESSAGE_INVALID_ITEM_PRICE);
+    }
+    return new Price(value);
+  }
 
     /**
      * Parses a {@code String itemIndex} into an {@code Index}.
