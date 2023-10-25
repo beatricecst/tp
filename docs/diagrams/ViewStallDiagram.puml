@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FoodNotesParser" as FoodNotesParser LOGIC_COLOR
+participant ":ViewStallCommandParser" as ViewStallCommandParser LOGIC_COLOR
+participant "f:ViewStallCommand" as ViewStallCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+MainWindow -> LogicManager : execute("view-stall s/1")
+activate LogicManager
+
+LogicManager -> FoodNotesParser : parseCommand("view-stall s/1")")
+activate FoodNotesParser
+
+create ViewStallCommandParser
+FoodNotesParser -> ViewStallCommandParser :ViewStallCommandParser()
+activate ViewStallCommandParser
+
+
+ViewStallCommandParser --> FoodNotesParser
+deactivate ViewStallCommandParser
+
+FoodNotesParser -> ViewStallCommandParser :parse("s/1")
+activate ViewStallCommandParser
+
+
+
+create ViewStallCommand
+ViewStallCommandParser -> ViewStallCommand : ViewStallCommand(predicate)
+activate ViewStallCommand
+ViewStallCommand --> ViewStallCommandParser : v
+deactivate ViewStallCommand
+
+ViewStallCommandParser --> FoodNotesParser: v
+deactivate ViewStallCommandParser
+ViewStallCommandParser -[hidden]-> FoodNotesParser : result
+destroy ViewStallCommandParser
+
+FoodNotesParser --> LogicManager : v
+deactivate FoodNotesParser
+
+LogicManager -> ViewStallCommand : execute()
+activate ViewStallCommand
+
+ViewStallCommand -> Model : getFilteredStallList()
+activate Model
+Model --> ViewStallCommand : filteredStalls
+deactivate Model
+
+
+
+ViewStallCommand -> Model : updateFilteredStallList(predicate)
+activate Model
+
+Model --> ViewStallCommand
+deactivate Model
+
+create CommandResult
+ViewStallCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewStallCommand
+deactivate CommandResult
+
+ViewStallCommand --> LogicManager : result
+deactivate ViewStallCommand
+
+
+MainWindow <--LogicManager
+deactivate LogicManager
+@enduml

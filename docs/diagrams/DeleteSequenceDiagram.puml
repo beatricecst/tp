@@ -4,9 +4,9 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":FoodNotesParser" as FoodNotesParser LOGIC_COLOR
+participant ":DeleteStallCommandParser" as DeleteStallCommandParser LOGIC_COLOR
+participant "d:DeleteStallCommand" as DeleteStallCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -14,56 +14,56 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete-stall s/1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> FoodNotesParser : parseCommand("delete stall s/1")
+activate FoodNotesParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeleteStallCommandParser
+FoodNotesParser -> DeleteStallCommandParser
+activate DeleteStallCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+DeleteStallCommandParser --> FoodNotesParser
+deactivate DeleteStallCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+FoodNotesParser -> DeleteStallCommandParser : parse("s/1")
+activate DeleteStallCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteStallCommand
+DeleteStallCommandParser -> DeleteStallCommand
+activate DeleteStallCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteStallCommand --> DeleteStallCommandParser : d
+deactivate DeleteStallCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+DeleteStallCommandParser --> FoodNotesParser : d
+deactivate DeleteStallCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DeleteStallCommandParser -[hidden]-> FoodNotesParser
+destroy DeleteStallCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+FoodNotesParser --> LogicManager : d
+deactivate FoodNotesParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteStallCommand : execute()
+activate DeleteStallCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteStallCommand -> Model : deleteStall(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteStallCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteStallCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteStallCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteStallCommand --> LogicManager : result
+deactivate DeleteStallCommand
 
 [<--LogicManager
 deactivate LogicManager
