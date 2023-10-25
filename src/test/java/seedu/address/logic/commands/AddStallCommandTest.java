@@ -193,7 +193,7 @@ public class AddStallCommandTest {
         }
 
         @Override
-        public void addItemReview(Item item, ItemReview itemReview) {
+        public void setItemReview(Item item, ItemReview itemReview) {
             throw new AssertionError("This method should not be called.");
         }
 

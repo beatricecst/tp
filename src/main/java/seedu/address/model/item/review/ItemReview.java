@@ -31,7 +31,7 @@ public class ItemReview {
     }
 
     public String getRatingString() {
-        return rating.toString();
+        return rating.starRating;
     }
 
     public String getDescriptionString() {

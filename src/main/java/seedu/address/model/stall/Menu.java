@@ -100,6 +100,10 @@ public class Menu implements ReadOnlyMenu {
 
     //// util methods
 
+    public int numOfItem() {
+        return this.items.getSize();
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

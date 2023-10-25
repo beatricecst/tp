@@ -28,7 +28,9 @@ public class JsonSerializableMenu {
      */
     @JsonCreator
     public JsonSerializableMenu(@JsonProperty("items") List<JsonAdaptedItem> items) {
-        this.items.addAll(items);
+        if (items != null) {
+            this.items.addAll(items);
+        }
     }
 
     /**

@@ -30,16 +30,29 @@ public class Stall {
         this.location = location;
         this.menu = new Menu();
         this.stallReview = new StallReview();
+
     }
 
     /**
-     * Constructor with menu
+     * Constructor with menu and no review
      */
     public Stall(Name name, Location location, Menu menu) {
         requireAllNonNull(name, location, menu);
         this.name = name;
         this.location = location;
         this.menu = menu;
+        this.stallReview = null;
+    }
+
+    /**
+     * Constructor with menu and review
+     */
+    public Stall(Name name, Location location, Menu menu, StallReview stallReview) {
+        requireAllNonNull(name, location, menu, stallReview);
+        this.name = name;
+        this.location = location;
+        this.menu = menu;
+        this.stallReview = stallReview;
     }
 
     public Name getName() {
@@ -54,12 +67,26 @@ public class Stall {
         return menu;
     }
 
+    public boolean hasStallReview() {
+        return stallReview != null;
+    }
+
     public StallReview getStallReview() {
         return stallReview;
     }
 
     public void setStallReview(StallReview stallReview) {
+        requireAllNonNull(stallReview);
         this.stallReview = stallReview;
+    }
+
+    public String getMenuString() {
+        String str = "Menu Items:" + '\n';
+        for (int i = 0; i < this.getMenu().numOfItem(); i++) {
+            Index index = Index.fromZeroBased(i);
+            str = str + String.valueOf(i + 1) + ". " + this.getMenu().getItem(index).getNameString() + '\n';
+        }
+        return str;
     }
 
     /**

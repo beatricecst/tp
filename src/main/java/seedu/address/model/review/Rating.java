@@ -13,6 +13,7 @@ public class Rating {
 
     public static final String VALIDATION_REGEX = "[1-5]";
 
+    public final String starRating;
     public final String rating;
 
     /**
@@ -21,7 +22,8 @@ public class Rating {
     public Rating(String rating) {
         requireNonNull(rating);
         checkArgument(isValidRating(rating), MESSAGE_CONSTRAINTS);
-        this.rating = starRating(Integer.parseInt(rating));
+        this.rating = rating;
+        this.starRating = starRating(Integer.parseInt(rating));
     }
 
     public static boolean isValidRating(String test) {

@@ -6,6 +6,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.review.Description;
 import seedu.address.model.review.Rating;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Represents a review of a stall in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -19,10 +21,11 @@ public class StallReview {
     /**
      * Constructs a StallReview object.
      *
+     * @param rating   A rating representing the star rating.
      * @param description A valid review.
-     * @param rating      A rating representing the star rating.
      */
-    public StallReview(Description description, Rating rating) {
+    public StallReview(Rating rating, Description description) {
+        requireAllNonNull(rating, description);
         this.rating = rating;
         this.description = description;
     }

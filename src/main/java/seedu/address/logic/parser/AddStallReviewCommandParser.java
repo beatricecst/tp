@@ -40,7 +40,7 @@ public class AddStallReviewCommandParser implements Parser<AddStallReviewCommand
         Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
 
-        StallReview stallReview = new StallReview(description, rating);
+        StallReview stallReview = new StallReview(rating, description);
 
         return new AddStallReviewCommand(stallReview, stallIndex);
     }

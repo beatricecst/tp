@@ -77,7 +77,7 @@ public class AddItemReviewCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM_REVIEW);
         }
 
-        model.addItemReview(itemToUpdate, toAdd);
+        model.setItemReview(itemToUpdate, toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, itemToUpdate.getName(), stallToUpdate.getName()));
     }
 

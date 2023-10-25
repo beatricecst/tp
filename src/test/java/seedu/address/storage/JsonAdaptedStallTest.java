@@ -34,14 +34,14 @@ public class JsonAdaptedStallTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedStall stall =
-                new JsonAdaptedStall(INVALID_NAME, VALID_LOCATION, null);
+                new JsonAdaptedStall(INVALID_NAME, VALID_LOCATION, null, null);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, stall::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedStall stall = new JsonAdaptedStall(null, VALID_LOCATION, null);
+        JsonAdaptedStall stall = new JsonAdaptedStall(null, VALID_LOCATION, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, stall::toModelType);
     }
@@ -50,14 +50,14 @@ public class JsonAdaptedStallTest {
     @Test
     public void toModelType_invalidLocation_throwsIllegalValueException() {
         JsonAdaptedStall stall =
-                new JsonAdaptedStall(VALID_NAME, INVALID_LOCATION, null);
+                new JsonAdaptedStall(VALID_NAME, INVALID_LOCATION, null, null);
         String expectedMessage = Location.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, stall::toModelType);
     }
 
     @Test
     public void toModelType_nullLocation_throwsIllegalValueException() {
-        JsonAdaptedStall stall = new JsonAdaptedStall(VALID_NAME, null, null);
+        JsonAdaptedStall stall = new JsonAdaptedStall(VALID_NAME, null, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, stall::toModelType);
     }

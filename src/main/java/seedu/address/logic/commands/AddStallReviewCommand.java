@@ -29,6 +29,7 @@ public class AddStallReviewCommand extends Command {
             + PREFIX_RATING + "2 "
             + PREFIX_DESCRIPTION + "The auntie is pretty and ambience good.";
     public static final String MESSAGE_ADD_STALL_REVIEW_SUCCESS = "Stall review added: %1$s";
+    public static final String MESSAGE_DUPLICATE_STALL_REVIEW = "This stall already has a review.";
 
     private final StallReview toAdd;
     private final Index index;
@@ -53,6 +54,10 @@ public class AddStallReviewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STALL_DISPLAYED_INDEX);
         }
         Stall stallToAddReview = lastShownList.get(index.getZeroBased());
+
+        if (stallToAddReview.hasStallReview()) {
+            throw new CommandException(MESSAGE_DUPLICATE_STALL_REVIEW);
+        }
         stallToAddReview.setStallReview(toAdd);
         return new CommandResult(String.format(MESSAGE_ADD_STALL_REVIEW_SUCCESS, Messages.format(toAdd)));
     }
