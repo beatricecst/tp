@@ -25,41 +25,41 @@ public class Stall {
      * Every field must be present and not null.
      */
     public Stall(Name name, Location location) {
-      requireAllNonNull(name, location);
-      this.name = name;
-      this.location = location;
-      this.stallReview = new StallReview();
-      this.menu = new Menu();
+        requireAllNonNull(name, location);
+        this.name = name;
+        this.location = location;
+        this.menu = new Menu();
+        this.stallReview = new StallReview();
     }
 
     /**
      * Constructor with menu
      */
     public Stall(Name name, Location location, Menu menu) {
-      requireAllNonNull(name, location, menu);
-      this.name = name;
-      this.location = location;
-      this.menu = menu;
+        requireAllNonNull(name, location, menu);
+        this.name = name;
+        this.location = location;
+        this.menu = menu;
     }
 
     public Name getName() {
-      return name;
+        return name;
     }
 
     public Location getLocation() {
-      return location;
+        return location;
     }
 
     public Menu getMenu() {
-      return menu;
+        return menu;
     }
 
     public StallReview getStallReview() {
-      return stallReview;
+        return stallReview;
     }
 
     public void setStallReview(StallReview stallReview) {
-      this.stallReview = stallReview;
+        this.stallReview = stallReview;
     }
 
     /**
@@ -67,13 +67,13 @@ public class Stall {
      * This defines a weaker notion of equality between two stalls.
      */
     public boolean isSameStall(Stall otherStall) {
-      if (otherStall == this) {
-        return true;
-      }
+        if (otherStall == this) {
+            return true;
+        }
 
-      return otherStall != null
-        && otherStall.getName().equals(getName())
-        && otherStall.getLocation().equals(getLocation());
+        return otherStall != null
+            && otherStall.getName().equals(getName())
+            && otherStall.getLocation().equals(getLocation());
     }
 
     /**
@@ -81,7 +81,7 @@ public class Stall {
      * This defines a stronger notion of equality between two stalls.
      */
     public boolean hasItem(Item item) {
-      return menu.hasItem(item);
+        return menu.hasItem(item);
     }
 
     /**
@@ -89,28 +89,29 @@ public class Stall {
      * The item must not already exist in the menu.
      */
     public void addItem(Item item) {
-      menu.addItem(item);
+        menu.addItem(item);
     }
 
     /**
      * Deletes an item from the menu.
      * The item must already exist in the menu.
      */
+
     public void deleteItem(Index itemIndex) {
-      menu.removeItem(itemIndex);
+        menu.removeItem(itemIndex);
 
     }
 
     public void deleteReview() {
-      this.stallReview = null;
+        this.stallReview = null;
     }
 
     public String getStallReviewString() {
-      if (this.stallReview != null) {
-        return stallReview.toString();
-      } else {
-        return "No review added.";
-      }
+        if (this.stallReview != null) {
+            return stallReview.toString();
+        } else {
+            return "No review added.";
+        }
     }
 
 
@@ -120,32 +121,32 @@ public class Stall {
      */
     @Override
     public boolean equals(Object other) {
-      if (other == this) {
-        return true;
-      }
+        if (other == this) {
+            return true;
+        }
 
-    // instanceof handles nulls
-      if (!(other instanceof Stall)) {
-        return false;
-      }
+        // instanceof handles nulls
+        if (!(other instanceof Stall)) {
+            return false;
+        }
 
-      Stall otherStall = (Stall) other;
-      return name.equals(otherStall.name)
-        && location.equals(otherStall.location)
-        && menu.equals(otherStall.menu);
+        Stall otherStall = (Stall) other;
+        return name.equals(otherStall.name)
+            && location.equals(otherStall.location)
+            && menu.equals(otherStall.menu);
     }
 
     @Override
     public int hashCode() {
-      // use this method for custom fields hashing instead of implementing your own
-      return Objects.hash(name, location);
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, location);
     }
 
     @Override
     public String toString() {
-      return new ToStringBuilder(this)
-        .add("name", name)
-        .add("location", location)
-        .toString();
+        return new ToStringBuilder(this)
+          .add("name", name)
+          .add("location", location)
+          .toString();
     }
 }
