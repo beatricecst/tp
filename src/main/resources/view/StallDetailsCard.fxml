@@ -37,7 +37,7 @@
               <Label fx:id="locationName" styleClass="cell_small_label" text="\$locationName" />
             </HBox>
             <FlowPane fx:id="tags" />
-
+            <Label fx:id="review" styleClass="cell_small_label" text="\$locationName" />
             <Label fx:id="menuItem" styleClass="cell_small_label" text="\$locationName" />
             <!--      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />-->
             <!--      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />-->
