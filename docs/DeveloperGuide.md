@@ -156,6 +156,32 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add a stall review feature
 ![Add a stall review](images/ReviewStallDiagram.png)
+=======
+### \[Proposed\] Sort price feature
+
+#### Proposed Implementation
+
+The proposed sort price functionality is facilitated by `SortedPriceCommand`.
+
+The following sequence diagram shows how the sort operation works:
+
+![SortPriceSequenceDiagram](images/SortPriceSequenceDiagram.png)
+
+`sortFilteredStoreList` is a method in `ModelManager` that sorts the filtered store list by price.
+It makes use of `Comparator` to compare the prices of the stalls.
+
+#### Design considerations:
+**Aspect: How sort price executes:**
+
+* **Alternative 1 (current choice):** Displays the sorted list of stalls only.
+    * Pros: Easy to implement.
+    * Cons: User needs to re-sort stalls by price after every command if they want to view the sorted list.
+
+* **Alternative 2:** Saves the sorted list of stalls in FoodNotes.
+    * Pros: User does not need to re-sort list after every command.
+    * Cons: May have performance issues in terms of memory usage, original ordering of stalls will be lost.
+
+_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Undo/redo feature
 
@@ -241,7 +267,25 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Find Item feature
 
+#### Implementation
+
+The find item feature is facilitated by `FindItemCommand` that extends `Command`.
+
+The following sequence diagram shows how the find item operation works:
+
+![FindItemSequenceDiagram](images/FindItemSequenceDiagram.png)
+
+The `ItemsContainKeywordsPredicate` is used to filter the list of stalls in FoodNotes. It is created with a list of keywords, and it checks if the menu items of a stall contains any of the keywords.
+
+* **Alternative 1 (current choice):** Allows the user to search for stalls containing any of the keywords.
+    * Pros: Users can search for multiple items at once, for example they can look for stalls that sell either "chicken" or "apple".
+    * Cons: More complicated to implement.
+
+* **Alternative 2:** Only allow the user to search for one keyword at a time.
+    * Pros: Easy to implement as parsing one keyword is more simple than parsing multiple keywords.
+    * Cons: Less flexible for the user.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

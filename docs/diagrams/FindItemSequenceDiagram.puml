@@ -1,0 +1,92 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FoodNotesParser" as FoodNotesParser LOGIC_COLOR
+participant ":FindItemCommandParser" as FindItemCommandParser LOGIC_COLOR
+participant "f:FindItemCommand" as FindItemCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "predicate:MenuContainsKeywordsPredicate" as MenuContainsKeywordsPredicate MODEL_COLOR
+end box
+MainWindow -> LogicManager : execute("find-item chicken")
+activate LogicManager
+
+LogicManager -> FoodNotesParser : parseCommand("find-item chicken")
+activate FoodNotesParser
+
+create FindItemCommandParser
+FoodNotesParser -> FindItemCommandParser :FindItemCommandParser()
+activate FindItemCommandParser
+
+
+
+FindItemCommandParser --> FoodNotesParser
+deactivate FindItemCommandParser
+
+FoodNotesParser -> FindItemCommandParser :parse("chicken")
+activate FindItemCommandParser
+
+create MenuContainsKeywordsPredicate
+FindItemCommandParser -> MenuContainsKeywordsPredicate
+
+
+activate MenuContainsKeywordsPredicate
+
+MenuContainsKeywordsPredicate --> FindItemCommandParser : predicate
+
+deactivate MenuContainsKeywordsPredicate
+MenuContainsKeywordsPredicate -[hidden]-> FindItemCommandParser : result
+destroy MenuContainsKeywordsPredicate
+
+create FindItemCommand
+FindItemCommandParser -> FindItemCommand : FindItemCommand(predicate)
+activate FindItemCommand
+FindItemCommand -> FindItemCommandParser : f
+deactivate FindItemCommand
+
+FindItemCommandParser --> FoodNotesParser: f
+deactivate FindItemCommandParser
+FindItemCommandParser -[hidden]-> FoodNotesParser : result
+destroy FindItemCommandParser
+
+FoodNotesParser --> LogicManager : f
+deactivate FoodNotesParser
+
+LogicManager -> FindItemCommand : execute()
+activate FindItemCommand
+
+FindItemCommand -> Model : updateFilteredStallList(predicate)
+activate Model
+
+
+Model --> FindItemCommand
+deactivate Model
+
+create CommandResult
+FindItemCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindItemCommand
+deactivate CommandResult
+
+
+FindItemCommand --> LogicManager : result
+deactivate FindItemCommand
+FindItemCommand -[hidden]-> LogicManager : result
+destroy FindItemCommand
+
+
+
+MainWindow <--LogicManager
+deactivate LogicManager
+@enduml
