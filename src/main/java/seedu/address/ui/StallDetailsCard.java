@@ -45,9 +45,11 @@ public class StallDetailsCard extends UiPart<Region> {
         name.setText(stall.getName().fullName);
         locationName.setText(stall.getLocation().locationName);
         if (stall.getMenu().getItemList().size() == 0) {
+            review.setText(stall.getStallReview().stallReviewString());
             String str = "No menu item added to this stall yet";
             menuItem.setText(str);
         } else {
+            review.setText(stall.getStallReview().stallReviewString());
             menuItem.setText(stall.getMenu().toString());
         }
 
